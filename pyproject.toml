@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "token-budget-py"
+version = "0.1.0"
+description = "Thread-safe shared token + USD budget for concurrent LLM tasks. Raises BudgetExceeded on push past cap. Reserve/commit two-phase API for fan-out workloads. Zero runtime deps."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Mukunda Rao Katta", email = "mukunda.vjcs6@gmail.com" }]
+keywords = [
+  "llm",
+  "ai",
+  "budget",
+  "cost",
+  "concurrency",
+  "fan-out",
+  "agents",
+  "rate-limit",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.4"]
+
+[project.urls]
+Homepage = "https://github.com/MukundaKatta/token-budget-py"
+Issues = "https://github.com/MukundaKatta/token-budget-py/issues"
+Source = "https://github.com/MukundaKatta/token-budget-py"
+"Rust sibling" = "https://crates.io/crates/token-budget-pool"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/token_budget"]
+
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/tests", "/README.md", "/LICENSE"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
