@@ -3,9 +3,9 @@ requires = ["hatchling>=1.24"]
 build-backend = "hatchling.build"
 
 [project]
-name = "token-budget-py"
+name = "agent-task-queue"
 version = "0.1.0"
-description = "Thread-safe shared token + USD budget for concurrent LLM tasks. Raises BudgetExceeded on push past cap. Reserve/commit two-phase API for fan-out workloads. Zero runtime deps."
+description = "Priority queue for agent sub-tasks. Enqueue work items with priorities, dequeue the next task, mark done or failed. Optional JSONL persistence survives crashes. Zero runtime deps."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -13,12 +13,12 @@ authors = [{ name = "Mukunda Rao Katta", email = "mukunda.vjcs6@gmail.com" }]
 keywords = [
   "llm",
   "ai",
-  "budget",
-  "cost",
-  "concurrency",
-  "fan-out",
   "agents",
-  "rate-limit",
+  "queue",
+  "priority-queue",
+  "task-queue",
+  "persistence",
+  "concurrency",
 ]
 classifiers = [
   "Development Status :: 3 - Alpha",
@@ -40,13 +40,12 @@ dependencies = []
 dev = ["pytest>=8.0", "ruff>=0.4"]
 
 [project.urls]
-Homepage = "https://github.com/MukundaKatta/token-budget-py"
-Issues = "https://github.com/MukundaKatta/token-budget-py/issues"
-Source = "https://github.com/MukundaKatta/token-budget-py"
-"Rust sibling" = "https://crates.io/crates/token-budget-pool"
+Homepage = "https://github.com/MukundaKatta/agent-task-queue"
+Issues = "https://github.com/MukundaKatta/agent-task-queue/issues"
+Source = "https://github.com/MukundaKatta/agent-task-queue"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/token_budget"]
+packages = ["src/agent_task_queue"]
 
 [tool.hatch.build.targets.sdist]
 include = ["/src", "/tests", "/README.md", "/LICENSE"]
