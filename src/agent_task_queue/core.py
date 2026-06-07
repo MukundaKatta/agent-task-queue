@@ -137,8 +137,15 @@ class TaskQueue:
 
         Returns:
             The new :class:`Task`.
+
+        Raises:
+            ValueError: If ``task_id`` is supplied and a task with that ID
+                already exists. (Silently overwriting it would orphan the
+                old heap entry and corrupt the queue's accounting.)
         """
         tid = task_id or uuid.uuid4().hex
+        if tid in self._tasks:
+            raise ValueError(f"A task with id {tid!r} already exists")
         task = Task(id=tid, name=name, priority=priority, payload=payload)
         self._tasks[tid] = task
         self._push_heap(task)
